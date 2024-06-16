@@ -21,8 +21,10 @@ const Home = ({ users }) => {
                                 <tr>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th className='col-2'>Date birth</th>
-                                    <th>About</th>
+                                    <th>Patronymic</th>
+                                    <th>Gender</th>
+                                    <th>Date birth</th>
+                                    <th>Email</th>
                                     <th>Show</th>
                                 </tr>
                             </thead>
@@ -31,8 +33,10 @@ const Home = ({ users }) => {
                                     <tr key={user.id}>
                                         <td>{user.first_name}</td>
                                         <td>{user.last_name}</td>
-                                        <td className='col-2'>{user.birth_date}</td>
-                                        <td>{user.about}</td>
+                                        <td>{user.patronymic}</td>
+                                        <td>{user.gender}</td>
+                                        <td>{user.birth_date}</td>
+                                        <td>{user.email}</td>
                                         <td>
                                             <Link
                                                 className='text-decoration-none'

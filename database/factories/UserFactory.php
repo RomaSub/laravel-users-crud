@@ -17,10 +17,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'about' => fake()->text(),
-            'birth_date' => fake()->date(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'patronymic' => $this->faker->firstName(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'birth_date' => $this->faker->date(),
+            'about' => $this->faker->text(200),
         ];
     }
 }

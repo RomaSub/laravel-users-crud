@@ -5,7 +5,10 @@ const Create = () => {
     const { data, setData, post, errors, processing } = useForm({
         first_name: "",
         last_name: "",
+        patronymic: "",
         birth_date: "",
+        gender: "",
+        email: "",
         about: "",
     })
 
@@ -49,6 +52,46 @@ const Create = () => {
                                 {errors.last_name}
                             </Form.Control.Feedback>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPatronymic">
+                            <Form.Label className="text-muted small">Patronymic</Form.Label>
+                            <Form.Control
+                                value={data.patronymic}
+                                onChange={(e) => setData('patronymic', e.target.value)}
+                                type="text"
+                                isInvalid={!!errors.patronymic}
+                                placeholder="Patronymic" />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.patronymic}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className='mb-3' controlId='formBasicGender'>
+                            <Form.Label className="text-muted small">Gender</Form.Label>
+                            <Form.Select
+                                value={data.gender}
+                                onChange={(e) => setData('gender', e.target.value)}
+                                type="text"
+                                isInvalid={!!errors.gender}
+                            >
+                                <option></option>
+                                <option>male</option>
+                                <option>female</option>
+                            </Form.Select>
+                            <Form.Control.Feedback type="invalid">
+                                {errors.gender}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label className="text-muted small">Email</Form.Label>
+                            <Form.Control
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                type="text"
+                                isInvalid={!!errors.email}
+                                placeholder="Email" />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.email}
+                            </Form.Control.Feedback>
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
                             <Form.Label className="text-muted small">Date birth</Form.Label>
                             <Form.Control
@@ -76,7 +119,7 @@ const Create = () => {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Row>
-                            <Col >
+                            <Col className='text-end'>
                                 <Button variant="primary" type="submit" disabled={processing}>Create</Button>
                             </Col>
                         </Row>

@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->paginate(15);
 
         return inertia('Home', ['users' => $users]);
 
@@ -32,10 +32,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'birth_date' => ['required'],
-            'about' => ['required'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'patronymic' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'in:male,female'],
+            'birth_date' => ['required', 'date'],
+            'about' => ['nullable', 'string'],
         ]);
 
         User::create($fields);
@@ -65,10 +68,13 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $fields = $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'birth_date' => ['required'],
-            'about' => ['required'],
+            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'patronymic' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'in:male,female'],
+            'birth_date' => ['required', 'date'],
+            'about' => ['nullable', 'string'],
         ]);
 
         $user->update($fields);
