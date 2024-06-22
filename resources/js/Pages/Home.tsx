@@ -1,19 +1,19 @@
-import { Link, Head, usePage } from '@inertiajs/react';
-import { Row, Col, Table, Container, Pagination, Alert } from 'react-bootstrap';
+import { Link, Head, usePage } from "@inertiajs/react";
+import { Row, Col, Table, Container, Pagination, Alert } from "react-bootstrap";
 
 const Home = ({ users }) => {
-    const { component } = usePage()
+    const { component } = usePage();
 
     const paginationLabels = {
-        prev: '< Prev',
-        next: 'Next >'
+        prev: "< Prev",
+        next: "Next >",
     };
 
     return (
         <>
             <Head title={component} />
-            <h1 className='mt-3 text-center'>Users</h1>
-            <Container className='mt-4'>
+            <h1 className="mt-3 text-center">Users</h1>
+            <Container className="mt-4">
                 <Row>
                     <Col>
                         <Table striped hover bordered>
@@ -39,8 +39,9 @@ const Home = ({ users }) => {
                                         <td>{user.email}</td>
                                         <td>
                                             <Link
-                                                className='text-decoration-none'
-                                                href={`users/${user.id}`}>
+                                                className="text-decoration-none"
+                                                href={route("users.show", user)}
+                                            >
                                                 Show
                                             </Link>
                                         </td>
@@ -57,15 +58,19 @@ const Home = ({ users }) => {
                             as={Link}
                             key={link.label}
                             active={link.active}
-                            href={link.url}>
-                            {link.label.includes('Previous') ? paginationLabels.prev :
-                                link.label.includes('Next') ? paginationLabels.next : link.label}
+                            href={link.url}
+                        >
+                            {link.label.includes("Previous")
+                                ? paginationLabels.prev
+                                : link.label.includes("Next")
+                                  ? paginationLabels.next
+                                  : link.label}
                         </Pagination.Item>
                     ))}
                 </Pagination>
             </Container>
         </>
-    )
-}
+    );
+};
 
 export default Home;

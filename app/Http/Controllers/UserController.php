@@ -15,7 +15,6 @@ class UserController extends Controller
         $users = User::latest()->paginate(15);
 
         return inertia('Home', ['users' => $users]);
-
     }
 
     /**
@@ -68,7 +67,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $fields = $request->validate([
-            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'patronymic' => ['required', 'string', 'max:255'],
@@ -89,6 +88,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('/'); //->with('message', 'The user has been successfully deleted!');
+        //->with('message', 'The user has been successfully deleted!');
+        return redirect('/');
     }
 }

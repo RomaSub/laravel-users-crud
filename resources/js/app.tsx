@@ -7,8 +7,8 @@ import Layout from './Layouts/Layout';
 createInertiaApp({
     title: title => title ? `${title} - Crud App` : 'Crud App',
     resolve: name => {
-        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-        let page = pages[`./Pages/${name}.jsx`]
+        const pages = import.meta.glob('./Pages/**/*.tsx', { eager: true })
+        const page = pages[`./Pages/${name}.tsx`]
         page.default.layout = page.default.layout || ((page) => <Layout children={page} />)
         return page
     },

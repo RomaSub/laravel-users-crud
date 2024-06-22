@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "@inertiajs/react";
+
 const Layout = ({ children }) => {
 
     return (
@@ -11,7 +12,7 @@ const Layout = ({ children }) => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Link href="/" className="nav-link">Home</Link>
-                            <Link href="/users/create" className="nav-link">Create</Link>
+                            <Link href={route('users.create')} className="nav-link">Create</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

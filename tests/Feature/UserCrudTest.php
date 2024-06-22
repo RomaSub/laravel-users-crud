@@ -31,13 +31,13 @@ class UserCrudTest extends TestCase
             'patronymic' => 'Иванович',
             'gender' => 'male',
             'birth_date' => '1990-01-01',
-            'about' => 'Описание пользователя'
+            'about' => 'Описание пользователя',
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
-            'first_name' => 'Иван'
+            'first_name' => 'Иван',
         ]);
     }
 
@@ -64,14 +64,14 @@ class UserCrudTest extends TestCase
             'patronymic' => 'Петровна',
             'gender' => 'female',
             'birth_date' => '1990-01-01',
-            'about' => 'Обновленное описание пользователя'
+            'about' => 'Обновленное описание пользователя',
         ]);
 
         $response->assertRedirect('/');
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
             'email' => 'updated@example.com',
-            'first_name' => 'Мария'
+            'first_name' => 'Мария',
         ]);
     }
 
@@ -84,7 +84,7 @@ class UserCrudTest extends TestCase
 
         $response->assertRedirect('/');
         $this->assertDatabaseMissing('users', [
-            'id' => $user->id
+            'id' => $user->id,
         ]);
     }
 }
