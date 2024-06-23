@@ -11,6 +11,9 @@ generate-key:
 migrate:
 	php artisan migrate
 
+seed:
+	php artisan db:seed
+
 start:
 	php artisan serve &
 	npm run dev
