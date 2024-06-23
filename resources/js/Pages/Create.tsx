@@ -1,8 +1,9 @@
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { Head, useForm } from "@inertiajs/react";
+import { User } from "@/types/User";
 
 const Create = () => {
-    const { data, setData, post, errors, processing } = useForm({
+    const { data, setData, post, errors, processing } = useForm<User>({
         first_name: "",
         last_name: "",
         patronymic: "",
@@ -14,7 +15,6 @@ const Create = () => {
 
     const handlerSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        //post("/users");
         post(route('users.store'));
     }
 
@@ -101,7 +101,6 @@ const Create = () => {
                                 onChange={(e) =>
                                     setData("gender", e.target.value)
                                 }
-                                type="text"
                                 isInvalid={!!errors.gender}
                             >
                                 <option></option>
@@ -157,7 +156,7 @@ const Create = () => {
                                 }
                                 type="text"
                                 as="textarea"
-                                rows="3"
+                                rows={3}
                                 isInvalid={!!errors.about}
                                 placeholder=""
                             />

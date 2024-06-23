@@ -1,25 +1,36 @@
+setup: install generate-key migrate
+
 install:
 	composer install
 	npm install
 
-run:
+generate-key:
+	cp .env.example .env
+	php artisan key:generate
+
+migrate:
+	php artisan migrate
+
+start:
 	php artisan serve &
 	npm run dev
 
 test:
 	php artisan test
 
-lint-js:
-	npx eslint .
+lint: lint-js lint-php
 
-fix-lint-js:
-	npx eslint --fix .
+lint-js:
+	-npx eslint .
+
+lint-php:
+	-composer exec phpcs -v
 
 analyse:
 	composer exec phpstan analyse -v -- --memory-limit=512M
 
-lint-php:
-	composer exec phpcs -v
+fix-lint-js:
+	npx eslint --fix .
 
 fix-lint-php:
 	composer exec phpcbf -v

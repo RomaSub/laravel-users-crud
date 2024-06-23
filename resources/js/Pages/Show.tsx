@@ -1,12 +1,17 @@
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import { useForm, Head, Link } from "@inertiajs/react";
+import { User } from "@/types/User";
 
-const Show = ({ user }) => {
+interface ShowProps {
+    user: User;
+}
+
+const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
     const { delete: destroy } = useForm();
 
-    const handlerSubmmit = (e) => {
+    const handlerSubmmit = (e: React.FormEvent) => {
         e.preventDefault();
-        destroy(route("users.destroy", user));
+        destroy(route("users.destroy", user.id));
     };
 
     return (
@@ -123,7 +128,7 @@ const Show = ({ user }) => {
                                     value={user.about}
                                     type="text"
                                     as="textarea"
-                                    rows="3"
+                                    rows={3}
                                     placeholder=""
                                 />
                             </Form.Group>
@@ -138,7 +143,7 @@ const Show = ({ user }) => {
                                     </Button>
                                     <Button
                                         as={Link}
-                                        href={route("users.edit", user)}
+                                        href={route("users.edit", user.id)}
                                         variant="primary"
                                     >
                                         Edit

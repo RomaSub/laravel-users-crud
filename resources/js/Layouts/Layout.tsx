@@ -1,8 +1,13 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "@inertiajs/react";
+import { ReactNode } from "react";
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+    children: ReactNode;
+}
 
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+    console.log(children)
     return (
         <>
             <Navbar bg="light" expand='lg' >

@@ -1,7 +1,21 @@
 import { Link, Head, usePage } from "@inertiajs/react";
-import { Row, Col, Table, Container, Pagination, Alert } from "react-bootstrap";
+import { Row, Col, Table, Container, Pagination } from "react-bootstrap";
+import { User } from "@/types/User";
 
-const Home = ({ users }) => {
+interface PaginationLink {
+    label: string;
+    url: string | undefined;
+    active: boolean;
+}
+
+interface HomeProps {
+    users: {
+        data: User[];
+        links: PaginationLink[];
+    };
+}
+
+const Home = ({ users }: HomeProps) => {
     const { component } = usePage();
 
     const paginationLabels = {
@@ -29,7 +43,7 @@ const Home = ({ users }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.data.map((user) => (
+                                {users.data.map((user: User) => (
                                     <tr key={user.id}>
                                         <td>{user.first_name}</td>
                                         <td>{user.last_name}</td>
@@ -40,7 +54,7 @@ const Home = ({ users }) => {
                                         <td>
                                             <Link
                                                 className="text-decoration-none"
-                                                href={route("users.show", user)}
+                                                href={route("users.show", user.id )}
                                             >
                                                 Show
                                             </Link>
@@ -53,7 +67,7 @@ const Home = ({ users }) => {
                 </Row>
 
                 <Pagination>
-                    {users.links.map((link) => (
+                    {users.links.map((link: PaginationLink) => (
                         <Pagination.Item
                             as={Link}
                             key={link.label}

@@ -1,7 +1,12 @@
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { Head, useForm } from "@inertiajs/react";
+import { User } from "@/types/User";
 
-const Edit = ({ user }) => {
+interface EditProps {
+    user: User;
+}
+
+const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
     const { data, setData, put, errors, processing } = useForm({
         first_name: user.first_name,
         last_name: user.last_name,
@@ -14,7 +19,7 @@ const Edit = ({ user }) => {
 
     const handlerSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        put(route("users.update", user));
+        put(route("users.update", user.id));
     }
 
     return (
@@ -100,7 +105,6 @@ const Edit = ({ user }) => {
                                 onChange={(e) =>
                                     setData("gender", e.target.value)
                                 }
-                                type="text"
                                 isInvalid={!!errors.gender}
                             >
                                 <option></option>
@@ -154,9 +158,8 @@ const Edit = ({ user }) => {
                                 onChange={(e) =>
                                     setData("about", e.target.value)
                                 }
-                                type="text"
                                 as="textarea"
-                                rows="3"
+                                rows={3}
                                 isInvalid={!!errors.about}
                                 placeholder=""
                             />
