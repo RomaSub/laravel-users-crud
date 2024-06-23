@@ -60,6 +60,11 @@ export default tseslint.config(
       ],
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'max-lines': ['warn', { max: 200 }]
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
     }
   }
 );
