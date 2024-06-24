@@ -1,5 +1,6 @@
 import './bootstrap';
 import { createInertiaApp } from '@inertiajs/react';
+import '../../lang/i18n';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from './Layouts/Layout';

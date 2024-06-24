@@ -1,6 +1,7 @@
 import { Link, Head, usePage } from '@inertiajs/react';
 import { Row, Col, Table, Container, Pagination } from 'react-bootstrap';
 import { User } from '@/types/User';
+import { useTranslation } from 'react-i18next';
 
 interface PaginationLink {
   label: string;
@@ -16,30 +17,31 @@ interface HomeProps {
 }
 
 const Home = ({ users }: HomeProps) => {
+  const { t } = useTranslation();
   const { component } = usePage();
 
   const paginationLabels = {
-    prev: '< Prev',
-    next: 'Next >'
+    prev: t('rest.prevBtn'),
+    next: t('rest.nextBtn')
   };
 
   return (
     <>
       <Head title={component} />
-      <h1 className="mt-3 text-center">Users</h1>
+      <h1 className="mt-3 text-center">{t('headers.users')}</h1>
       <Container className="mt-4">
         <Row>
           <Col>
             <Table striped hover bordered>
               <thead>
                 <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Patronymic</th>
-                  <th>Gender</th>
-                  <th>Date birth</th>
-                  <th>Email</th>
-                  <th>Show</th>
+                  <th>{t('form.firstName')}</th>
+                  <th>{t('form.lastName')}</th>
+                  <th>{t('form.patronymic')}</th>
+                  <th>{t('form.gender')}</th>
+                  <th>{t('form.dateBirth')}</th>
+                  <th>{t('form.email')}</th>
+                  <th>{t('rest.show')}</th>
                 </tr>
               </thead>
               <tbody>

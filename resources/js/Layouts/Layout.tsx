@@ -1,25 +1,28 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from '@inertiajs/react';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand>Todo</Navbar.Brand>
+          <Navbar.Brand>{t('layout.todo')}</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link href="/" className="nav-link">
-                Home
+                {t('layout.home')}
               </Link>
               <Link href={route('users.create')} className="nav-link">
-                Create
+                {t('layout.create')}
               </Link>
             </Nav>
           </Navbar.Collapse>

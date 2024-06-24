@@ -1,12 +1,15 @@
 import { Form, Col, Row, Container, Button } from 'react-bootstrap';
 import { Head, useForm } from '@inertiajs/react';
 import { User } from '@/types/User';
+import { useTranslation } from 'react-i18next';
 
 interface EditProps {
   user: User;
 }
 
 const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
+  const { t } = useTranslation();
+
   const { data, setData, put, errors, processing } = useForm({
     first_name: user.first_name,
     last_name: user.last_name,
@@ -27,81 +30,93 @@ const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
       <Head title="Create" />
       <Row className="justify-content-center mb-3">
         <Col>
-          <h1 className="text-center">Edit user</h1>
+          <h1 className="text-center">{t('header.editUser')}</h1>
         </Col>
       </Row>
       <Row className="justify-content-center">
         <Col className="col-lg-6">
           <Form className="border rounded p-3" onSubmit={handlerSubmit}>
             <Form.Group className="mb-3" controlId="formBasicFirstName">
-              <Form.Label className="text-muted small">First name</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.firstName')}
+              </Form.Label>
               <Form.Control
                 value={data.first_name}
                 onChange={e => setData('first_name', e.target.value)}
                 type="text"
                 isInvalid={!!errors.first_name}
-                placeholder="First name"
+                placeholder={t('form.firstName')}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.first_name}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label className="text-muted small">Last name</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.lastName')}
+              </Form.Label>
               <Form.Control
                 value={data.last_name}
                 onChange={e => setData('last_name', e.target.value)}
                 type="text"
                 isInvalid={!!errors.last_name}
-                placeholder="Last name"
+                placeholder={t('form.lastName')}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.last_name}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPatronymic">
-              <Form.Label className="text-muted small">Patronymic</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.patronymic')}
+              </Form.Label>
               <Form.Control
                 value={data.patronymic}
                 onChange={e => setData('patronymic', e.target.value)}
                 type="text"
                 isInvalid={!!errors.patronymic}
-                placeholder="Patronymic"
+                placeholder={t('form.patronymic')}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.patronymic}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicGender">
-              <Form.Label className="text-muted small">Gender</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.gender')}
+              </Form.Label>
               <Form.Select
                 value={data.gender}
                 onChange={e => setData('gender', e.target.value)}
                 isInvalid={!!errors.gender}
               >
-                <option>''</option>
-                <option>male</option>
-                <option>female</option>
+                <option></option>
+                <option>{t('rest.male')}</option>
+                <option>{t('rest.female')}</option>
               </Form.Select>
               <Form.Control.Feedback type="invalid">
                 {errors.gender}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label className="text-muted small">Email</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.email')}
+              </Form.Label>
               <Form.Control
                 value={data.email}
                 onChange={e => setData('email', e.target.value)}
                 type="text"
                 isInvalid={!!errors.email}
-                placeholder="Email"
+                placeholder={t('form.email')}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.email}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicDate">
-              <Form.Label className="text-muted small">Date birth</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.dateBirth')}
+              </Form.Label>
               <Form.Control
                 value={data.birth_date}
                 onChange={e => setData('birth_date', e.target.value)}
@@ -114,7 +129,9 @@ const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicAbout">
-              <Form.Label className="text-muted small">About you</Form.Label>
+              <Form.Label className="text-muted small">
+                {t('form.aboutYou')}
+              </Form.Label>
               <Form.Control
                 value={data.about}
                 onChange={e => setData('about', e.target.value)}
@@ -130,7 +147,7 @@ const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
             <Row>
               <Col className="text-end">
                 <Button variant="primary" type="submit" disabled={processing}>
-                  Save changes
+                  {t('rest.saveChangesBtn')}
                 </Button>
               </Col>
             </Row>
