@@ -8,6 +8,12 @@ setup:
 	npm ci
 	npm run build
 
+# ansible-setup:
+#     ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
+
+# ansible-release:
+#     ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/release.yml
+
 migrate:
 	php artisan migrate
 
