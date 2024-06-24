@@ -43,7 +43,7 @@ WORKDIR /var/www/html
 # Копируем файлы Composer
 COPY composer.json composer.lock ./
 
-# Устанавливаем PHP-зависимости
+# Устанавливаем PHP-зависимости и устанавливаем Composer зависимости
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 
 # Копируем весь исходный код проекта
