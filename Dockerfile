@@ -49,15 +49,8 @@ RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 # Копируем весь исходный код проекта
 COPY . .
 
-# Копируем собранные файлы фронтенда в директорию public
-COPY --from=frontend /app/public/build /var/www/html/public
-
-# Устанавливаем права на директории storage и bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Копируем файл .env и генерируем ключ Laravel
+# Копируем файл .env.example и переименовываем в .env
 COPY .env.example .env
-RUN php artisan key:generate
 
-# Запускаем Laravel-приложение через php-fpm
-CMD ["php-fpm"]
+# Запускаем сборку ключа Laravel при запуске контейнера
+CMD php artisan key:generate && php-fpm
