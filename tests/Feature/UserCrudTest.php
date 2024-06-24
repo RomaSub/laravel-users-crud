@@ -11,7 +11,7 @@ class UserCrudTest extends TestCase
     use DatabaseTransactions;
 
     /** @test */
-    public function it_can_display_a_list_of_users()
+    public function displayUsers()
     {
         User::factory()->count(5)->create();
 
@@ -22,7 +22,7 @@ class UserCrudTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_user()
+    public function createUser()
     {
         $response = $this->post('/users', [
             'email' => 'test@example.com',
@@ -42,7 +42,7 @@ class UserCrudTest extends TestCase
     }
 
     /** @test */
-    public function it_can_show_a_user()
+    public function showUser()
     {
         $user = User::factory()->create();
 
@@ -53,7 +53,7 @@ class UserCrudTest extends TestCase
     }
 
     /** @test */
-    public function it_can_update_a_user()
+    public function updateUser()
     {
         $user = User::factory()->create();
 
@@ -76,7 +76,7 @@ class UserCrudTest extends TestCase
     }
 
     /** @test */
-    public function it_can_delete_a_user()
+    public function deleteUser()
     {
         $user = User::factory()->create();
 

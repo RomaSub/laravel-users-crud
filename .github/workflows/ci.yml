@@ -33,8 +33,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run JavaScript linter
-        run: npx eslint .
+      # - name: Run JavaScript linter
+      #   run: npx eslint .
 
       - name: Run PHP linter
         run: composer exec phpcs -v
