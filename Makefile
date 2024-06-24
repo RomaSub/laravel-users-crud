@@ -1,12 +1,12 @@
-setup: install generate-key migrate
-
-install:
+setup:
 	composer install
-	npm install
-
-generate-key:
-	cp .env.example .env
+	cp -n .env.example .env
 	php artisan key:generate
+	touch database/database.sqlite
+	php artisan migrate
+	php artisan db:seed
+	npm ci
+	npm run build
 
 migrate:
 	php artisan migrate

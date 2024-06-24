@@ -8,7 +8,7 @@ createInertiaApp({
   title: title => (title ? `${title} - Crud App` : 'Crud App'),
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.tsx', { eager: true });
-    const page = pages[`./Pages/${name}.tsx`];
+    const page = pages[`./Pages/Users/${name}.tsx`];
     page.default.layout =
       page.default.layout || (page => <Layout>{page}</Layout>);
     return page;
