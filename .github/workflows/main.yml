@@ -27,7 +27,7 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
-      - run: docker run --rm ${{ env.TEST_TAG }} make test
+      - run: docker run --rm ${{ env.TEST_TAG }} php artisan test
       # - run: docker run --rm ${{ env.TEST_TAG }} make lint
 
       - name: Build and push
