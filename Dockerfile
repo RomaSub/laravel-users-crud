@@ -52,5 +52,11 @@ COPY . .
 # Копируем файл .env.example и переименовываем в .env
 COPY .env.example .env
 
-# Запускаем сборку ключа Laravel при запуске контейнера
-CMD php artisan key:generate && php-fpm
+# Генерируем ключ Laravel
+RUN php artisan key:generate
+
+# Устанавливаем права на директории storage и bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Запускаем Laravel-приложение через php-fpm
+CMD ["php-fpm"]
