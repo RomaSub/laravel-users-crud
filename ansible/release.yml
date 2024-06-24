@@ -1,0 +1,26 @@
+- hosts: all
+  tasks:
+    - apt:
+        name: python3-pip
+        update_cache: yes
+        cache_valid_time: 604800 # 1 week
+
+    - pip:
+        name: docker
+
+    - community.docker.docker_container:
+        name: app
+        # Обязательно указываем тег, который хотим деплоить
+        # Если образа на сервере нет, Ansible его автоматически скачает
+        image: "rommaa/laravel-users-crud:{{ version }}"
+        # Подключаем супервизор
+        # Если контейнер остановится, например, из-за ошибок
+        # супервизор Docker его перезапустит
+        restart_policy: always
+        # Запускаем, если не запущен
+        state: started
+        # Делаем доступным снаружи
+        ports:
+          - 3000:3000
+        env: # Настраиваем
+          NODE_ENV: production
