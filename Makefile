@@ -32,6 +32,8 @@ test:
 
 lint: lint-js lint-php
 
+fix: prettier fix-lint-js fix-lint-php
+
 lint-js:
 	-npx eslint .
 
@@ -45,7 +47,7 @@ analyse:
 	composer exec phpstan analyse -v -- --memory-limit=512M
 
 fix-lint-js:
-	npx eslint --fix .
+	-npx eslint --fix .
 
 fix-lint-php:
-	composer exec phpcbf -v
+	-composer exec phpcbf -v

@@ -27,8 +27,8 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
-      # - run: docker run --rm ${{ env.TEST_TAG }} make test
-      # - run: docker run --rm ${{ env.TEST_TAG }} make lint
+      - run: make test
+      - run: make lint
 
       - name: Build and push
         uses: docker/build-push-action@v2
