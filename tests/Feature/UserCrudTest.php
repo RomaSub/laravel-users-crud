@@ -83,7 +83,7 @@ class UserCrudTest extends TestCase
         $response = $this->delete("/users/{$user->id}");
 
         $response->assertRedirect('/');
-        $this->assertDatabaseMissing('users', [
+        $this->assertSoftDeleted('users', [
             'id' => $user->id,
         ]);
     }

@@ -4,6 +4,11 @@ import '../../lang/i18n';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from './Layouts/Layout';
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN_PUBLIC,
+});
 
 createInertiaApp({
   title: title => (title ? `${title} - Crud App` : 'Crud App'),

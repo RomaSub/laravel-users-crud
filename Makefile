@@ -17,6 +17,9 @@ setup:
 migrate:
 	php artisan migrate
 
+sentry:
+	php artisan sentry:test
+
 seed:
 	php artisan db:seed
 
@@ -34,6 +37,9 @@ lint-js:
 
 lint-php:
 	-composer exec phpcs -v
+
+prettier:
+	-npx prettier --write .
 
 analyse:
 	composer exec phpstan analyse -v -- --memory-limit=512M

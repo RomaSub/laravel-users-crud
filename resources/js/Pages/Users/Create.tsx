@@ -85,7 +85,7 @@ const Create = () => {
                 onChange={e => setData('gender', e.target.value)}
                 isInvalid={!!errors.gender}
               >
-                <option></option>
+                <option />
                 <option>{t('rest.male')}</option>
                 <option>{t('rest.female')}</option>
               </Form.Select>

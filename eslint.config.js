@@ -19,6 +19,7 @@ export default tseslint.config(
   },
   {
     ignores: [
+      'public/build/assets/**',
       'vite.config.ts',
       'dist',
       'node_modules',
