@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'gender' => $this->faker->randomElement(['male', 'female']),
             'birth_date' => $this->faker->date(),
             'about' => $this->faker->text(200),
+            'state' => 'active',
         ];
     }
 }

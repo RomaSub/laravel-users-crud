@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\States\Banned;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,17 +28,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request) // Измените тип запроса на UserRequest
     {
-        $fields = $request->validate([
-            'email' => ['required', 'email', 'unique:users,email'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'patronymic' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'in:male,female'],
-            'birth_date' => ['required', 'date'],
-            'about' => ['nullable', 'string'],
-        ]);
+        $fields = $request->validated();
 
         User::create($fields);
 
@@ -65,17 +56,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user) // Измените тип запроса на UserRequest
     {
-        $fields = $request->validate([
-            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'patronymic' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'in:male,female'],
-            'birth_date' => ['required', 'date'],
-            'about' => ['nullable', 'string'],
-        ]);
+        $fields = $request->validated();
 
         $user->update($fields);
 
@@ -89,19 +72,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        //->with('message', 'The user has been successfully deleted!');
         return redirect('/');
     }
-
-public function ban(User $user)
-   {
-       $user->state->transitionTo(Banned::class);
-       return redirect()->back()
-   }
-
-   public function activate(User $user)
-   {
-       $user->state->transitionTo(Active::class);
-       return redirect()->back()
-   }
 }
