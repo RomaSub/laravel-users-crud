@@ -12,6 +12,9 @@ jobs:
   lint_test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Setup
         run: make setup
 
@@ -48,6 +51,9 @@ jobs:
           context: .
           push: true
           tags: ${{ env.TEST_TAG }}
+
+          # - run: docker run --rm ${{ env.TEST_TAG }} make test  # Эта строка оставлена нетронутой
+          # - run: docker run --rm ${{ env.TEST_TAG }} make lint  # Эта строка оставлена нетронутой
 
       - name: Build and push latest Docker image
         uses: docker/build-push-action@v2
