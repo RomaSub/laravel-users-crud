@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\States\Banned;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -91,4 +92,16 @@ class UserController extends Controller
         //->with('message', 'The user has been successfully deleted!');
         return redirect('/');
     }
+
+public function ban(User $user)
+   {
+       $user->state->transitionTo(Banned::class);
+       return redirect()->back()
+   }
+
+   public function activate(User $user)
+   {
+       $user->state->transitionTo(Active::class);
+       return redirect()->back()
+   }
 }

@@ -4,13 +4,14 @@ namespace App\States;
 
 use App\Models\User;
 use Spatie\ModelStates\State;
-use Spatie\ModelStates\StateConfig;
 
 abstract class UserState extends State
 {
+    protected $user;
+
     public function __construct(User $user)
     {
-        $this->account = $account;
+        $this->user = $user;
     }
 
     public static $states = [
@@ -27,11 +28,12 @@ abstract class UserState extends State
     {
         return $this->is(Banned::class);
     }
-    /*public static function config(): StateConfig*/
+        /*public static function config(): StateConfig*/
     /*{*/
     /*    return parent::config()*/
     /*        ->default(Active::class)*/
     /*        ->allowTransition(Active::class, Banned::class)*/
     /*        ->allowTransition(Banned::class, Active::class);*/
     /*}*/
+
 }
