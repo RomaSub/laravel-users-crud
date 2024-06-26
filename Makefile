@@ -6,14 +6,14 @@ setup:
 	php artisan migrate
 	php artisan db:seed
 	npm ci
-    npm run prepare
+	npm run prepare
 	npm run build
 
 # ansible-setup:
-#     ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
+# 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
 
 # ansible-release:
-#     ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/release.yml
+# 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/release.yml
 
 migrate:
 	php artisan migrate
