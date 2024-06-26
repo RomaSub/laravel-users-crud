@@ -133,7 +133,7 @@ const Edit: React.FC<EditProps> = ({ user }: EditProps) => {
                 {t('form.aboutYou')}
               </Form.Label>
               <Form.Control
-                value={data.about}
+                value={data.about || ''}
                 onChange={e => setData('about', e.target.value)}
                 as="textarea"
                 rows={3}

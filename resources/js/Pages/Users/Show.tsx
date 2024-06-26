@@ -105,7 +105,7 @@ const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
                 <Form.Control
                   readOnly
                   disabled
-                  value={user.about}
+                  value={user.about || ''}
                   type="text"
                   as="textarea"
                   rows={3}
