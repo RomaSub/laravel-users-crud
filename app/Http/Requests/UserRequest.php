@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
         $userId = $this->route('user') ? $this->route('user')->id : null;
 
         return [
-            'email' => ['required', 'email', 'unique:users,email'.($userId ? ",$userId" : '')],
+            'email' => ['required', 'email', 'unique:users,email' . ($userId ? ",$userId" : '')],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'patronymic' => ['required', 'string', 'max:255'],

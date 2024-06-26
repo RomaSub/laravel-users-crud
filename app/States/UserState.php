@@ -35,5 +35,4 @@ abstract class UserState extends State
     /*        ->allowTransition(Active::class, Banned::class)*/
     /*        ->allowTransition(Banned::class, Active::class);*/
     /*}*/
-
 }

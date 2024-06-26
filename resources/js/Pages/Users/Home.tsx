@@ -25,8 +25,7 @@ const Home = ({ users }: HomeProps) => {
     next: t('rest.nextBtn')
   };
 
-
-    console.log(users)
+  console.log(users);
   return (
     <>
       <Head title={component} />

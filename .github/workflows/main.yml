@@ -9,13 +9,13 @@ env:
   TEST_TAG: rommaa/laravel-users-crud:test
 
 jobs:
-  lint_test:
+  docker_build_push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up PHP 8.2
+      - name: Set up PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
@@ -23,13 +23,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Укажите нужную версию Node.js
+          node-version: '20'
 
       - name: Setup
         run: make setup
-
-      - name: Fix code style
-        run: make fix
 
       - name: Lint code
         run: make lint
@@ -37,9 +34,6 @@ jobs:
       - name: Run tests
         run: make test
 
-  docker_build_push:
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 

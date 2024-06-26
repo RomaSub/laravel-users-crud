@@ -6,6 +6,7 @@ setup:
 	php artisan migrate
 	php artisan db:seed
 	npm ci
+    npm run prepare
 	npm run build
 
 # ansible-setup:

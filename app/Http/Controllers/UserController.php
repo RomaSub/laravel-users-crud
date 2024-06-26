@@ -28,7 +28,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request) // Измените тип запроса на UserRequest
+    // Измените тип запроса на UserRequest
+    public function store(UserRequest $request)
     {
         $fields = $request->validated();
 
@@ -56,7 +57,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, User $user) // Измените тип запроса на UserRequest
+    // Измените тип запроса на UserRequest
+    public function update(UserRequest $request, User $user)
     {
         $fields = $request->validated();
 
