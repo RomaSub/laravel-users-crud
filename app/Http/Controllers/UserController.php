@@ -35,7 +35,7 @@ class UserController extends Controller
 
         User::create($fields);
 
-        return redirect('/');
+        return redirect(route('users.index'));
     }
 
     /**
@@ -64,7 +64,7 @@ class UserController extends Controller
 
         $user->update($fields);
 
-        return redirect('/');
+        return redirect(route('users.index'));
     }
 
     /**
@@ -74,6 +74,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('/');
+        return redirect(route('users.index'));
     }
 }

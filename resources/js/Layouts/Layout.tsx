@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link href="/" className="nav-link">
+              <Link href={route('users.index')} className="nav-link">
                 {t('layout.home')}
               </Link>
               <Link href={route('users.create')} className="nav-link">

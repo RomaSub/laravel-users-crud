@@ -15,7 +15,7 @@ class UserCrudTest extends TestCase
     {
         User::factory()->count(5)->create();
 
-        $response = $this->get('/');
+        $response = $this->get(route('users.index'));
 
         $response->assertStatus(200);
         $response->assertSee('users');
@@ -34,7 +34,7 @@ class UserCrudTest extends TestCase
             'about' => 'Описание пользователя',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect(route('users.index'));
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
             'first_name' => 'Иван',
@@ -67,7 +67,7 @@ class UserCrudTest extends TestCase
             'about' => 'Обновленное описание пользователя',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect(route('users.index'));
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
             'email' => 'updated@example.com',
@@ -82,7 +82,7 @@ class UserCrudTest extends TestCase
 
         $response = $this->delete("/users/{$user->id}");
 
-        $response->assertRedirect('/');
+        $response->assertRedirect(route('users.index'));
         $this->assertSoftDeleted('users', [
             'id' => $user->id,
         ]);
