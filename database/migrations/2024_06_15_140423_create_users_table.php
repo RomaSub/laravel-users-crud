@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->date('birth_date');
             $table->text('about')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
             $table->softDeletes();
         });
