@@ -18,7 +18,7 @@
         image: rommaa/laravel-users-crud:latest
         restart_policy: always
         ports:
-          - '80:80' # Убедитесь, что порты совпадают с теми, что вы хотите использовать
+          - '80:80'
         env:
           APP_ENV: production
-          DB_CONNECTION: sqlite # Настройте, как вам нужно
+          DB_CONNECTION: sqlite

@@ -30,7 +30,9 @@ const en = {
       male: 'male',
       female: 'female',
       prevBtn: '< Prev',
-      nextBtn: 'Next >'
+      nextBtn: 'Next >',
+      banBtn: 'Ban',
+      unBanBtn: 'Unban'
     }
   }
 };

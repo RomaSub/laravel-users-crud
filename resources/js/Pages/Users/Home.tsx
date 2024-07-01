@@ -1,6 +1,6 @@
-import { Link, Head, usePage } from '@inertiajs/react';
-import { Row, Col, Table, Container, Pagination } from 'react-bootstrap';
 import { User } from '@/types/User';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { Col, Container, Pagination, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 interface PaginationLink {
@@ -46,7 +46,10 @@ const Home = ({ users }: HomeProps) => {
               </thead>
               <tbody>
                 {users.data.map((user: User) => (
-                  <tr key={user.id}>
+                  <tr
+                    key={user.id}
+                    className={user.state === 'banned' ? 'table-danger' : ''}
+                  >
                     <td>{user.first_name}</td>
                     <td>{user.last_name}</td>
                     <td>{user.patronymic}</td>

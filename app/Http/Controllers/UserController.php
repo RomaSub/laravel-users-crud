@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\States\Active;
+use App\States\Banned;
 
 class UserController extends Controller
 {
@@ -28,7 +30,6 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // Измените тип запроса на UserRequest
     public function store(UserRequest $request)
     {
         $fields = $request->validated();
@@ -57,7 +58,6 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // Измените тип запроса на UserRequest
     public function update(UserRequest $request, User $user)
     {
         $fields = $request->validated();
@@ -73,6 +73,20 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return redirect(route('users.index'));
+    }
+
+    public function ban(User $user)
+    {
+        $user->state->transitionTo(Banned::class);
+
+        return redirect(route('users.index'));
+    }
+
+    public function unBan(User $user)
+    {
+        $user->state->transitionTo(Active::class);
 
         return redirect(route('users.index'));
     }

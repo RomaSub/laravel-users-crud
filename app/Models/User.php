@@ -24,15 +24,8 @@ class User extends Model
         'gender',
         'birth_date',
         'about',
+        'state',
     ];
-
-    protected function statusStates(): void
-    {
-        $this->addState('state', UserState::class)
-            ->default(Active::class)
-            ->allowTransition(Active::class, Banned::class)
-            ->allowTransition(Banned::class, Active::class);
-    }
 
     protected $casts = [
         'state' => UserState::class,

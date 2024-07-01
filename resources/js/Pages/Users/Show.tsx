@@ -9,11 +9,19 @@ interface ShowProps {
 
 const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
   const { t } = useTranslation();
-  const { delete: destroy } = useForm();
+  const { delete: destroy, post } = useForm();
 
   const handlerSubmmit = (e: React.FormEvent) => {
     e.preventDefault();
     destroy(route('users.destroy', user.id));
+  };
+
+  const handleBan = () => {
+    post(route('users.ban', user.id));
+  };
+
+  const handleUnBan = () => {
+    post(route('users.unBan', user.id));
   };
 
   return (
@@ -113,6 +121,25 @@ const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
                 />
               </Form.Group>
               <Row>
+                <Col>
+                  {user.state === 'active' ? (
+                    <Button
+                      className="mx-2"
+                      variant="warning"
+                      onClick={handleBan}
+                    >
+                      {t('rest.banBtn')}
+                    </Button>
+                  ) : (
+                    <Button
+                      className="mx-2"
+                      variant="success"
+                      onClick={handleUnBan}
+                    >
+                      {t('rest.unBanBtn')}
+                    </Button>
+                  )}
+                </Col>
                 <Col className="text-end">
                   <Button type="submit" className="mx-2" variant="danger">
                     {t('rest.deleteBtn')}
