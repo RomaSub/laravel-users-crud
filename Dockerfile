@@ -1,50 +1,40 @@
-# Stage 1: Сборка фронтенда
-FROM node:20 AS frontend
+# Используем базовый образ PHP с Node.js
+FROM php:8.2-cli
 
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm ci
-
-COPY . .
-
-RUN npm run build
-
-# Stage 2: Сборка бэкенда
-FROM php:8.3-fpm
-
+# Установка необходимых системных библиотек и инструментов
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
+    libpq-dev \
+    libzip-dev \
     zip \
     unzip \
     git \
-    libpq-dev \
-    && docker-php-ext-install pdo_pgsql
+    nodejs \
+    npm \
+    && docker-php-ext-install pdo pdo_pgsql zip
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Установка Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
 
-# Установка Node.js для npm
-COPY --from=node:20 /usr/local/bin/node /usr/local/bin/node
-COPY --from=node:20 /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+# Установка Node.js
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
-WORKDIR /var/www/html
 
+# Установка рабочей директории
+WORKDIR /app
+
+# Копирование зависимостей и установка
 COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader
 
-# Установка PHP-зависимостей и автозагрузчика Composer
-RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader \
-    && composer dump-autoload --no-scripts --no-dev --optimize
+COPY package.json package-lock.json ./
+RUN npm install
+RUN npm run build
 
+# Копирование исходного кода
 COPY . .
 
-COPY --from=frontend /app/public/build /var/www/html/public
-
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-COPY .env.example .env
-
-RUN php artisan key:generate
-
-CMD ["php-fpm"]
+# Выполнение миграций и запуск приложения
+CMD ["bash", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"]

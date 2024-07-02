@@ -1,24 +1,29 @@
 - hosts: all
-  become: yes
   tasks:
+    - name: Install Python and Docker dependencies
+      apt:
+        name:
+          - python3-pip
+          - docker.io
+        update_cache: yes
+
+    - name: Install Docker Python module
+      pip:
+        name: docker
+
     - name: Pull Docker image
       community.docker.docker_image:
-        name: rommaa/laravel-users-crud
-        tag: latest
+        name: "rommaa/laravel-users-crud:{{ version }}"
         source: pull
 
-    - name: Stop and remove old container (if exists)
+    - name: Run Docker container
       community.docker.docker_container:
-        name: laravel_app
-        state: absent
-
-    - name: Run new Docker container
-      community.docker.docker_container:
-        name: laravel_app
-        image: rommaa/laravel-users-crud:latest
+        name: app
+        image: "rommaa/laravel-users-crud:{{ version }}"
+        state: started
         restart_policy: always
         ports:
-          - '80:8000'
+          - "8000:8000"
         env:
           APP_ENV: production
           DB_CONNECTION: pgsql
