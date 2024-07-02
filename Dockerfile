@@ -1,5 +1,5 @@
 # Stage 1: Сборка фронтенда
-FROM node:22 AS frontend
+FROM node:20 AS frontend
 
 WORKDIR /app
 
@@ -19,15 +19,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     git \
-    libsqlite3-dev \
-    sqlite3 \
-    && docker-php-ext-install pdo_mysql pdo_sqlite
+    libpq-dev \
+    && docker-php-ext-install pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Установка Node.js для npm
-COPY --from=node:22 /usr/local/bin/node /usr/local/bin/node
-COPY --from=node:22 /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:20 /usr/local/bin/node /usr/local/bin/node
+COPY --from=node:20 /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 WORKDIR /var/www/html
