@@ -10,11 +10,11 @@ setup:
 	npm run prepare
 	npm run build
 
-# ansible-setup:
-# 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
+ansible-setup:
+	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
 
-# ansible-release:
-# 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/release.yml
+ansible-release:
+	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/release.yml
 
 migrate:
 	php artisan migrate

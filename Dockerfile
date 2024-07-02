@@ -48,4 +48,4 @@ COPY .env.example .env
 
 RUN php artisan key:generate
 
-CMD ["php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["bash", "-c", "php artisan migrate:refresh --seed --force && php artisan serve --host=0.0.0.0 --port=8000"]
