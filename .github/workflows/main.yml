@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
 
-env: 
+env:
   TEST_TAG: rommaa/laravel-users-crud:test
 
 jobs:
@@ -27,9 +27,14 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
+      - run: cp .env.example .env
+
       - run: docker-compose -f docker-compose.yml up -d db
+
       - run: docker run --network container:postgres ${{ env.TEST_TAG }} php artisan migrate --force
+
       - run: docker run --network container:postgres ${{ env.TEST_TAG }} php artisan test
+
       - run: docker run --network container:postgres ${{ env.TEST_TAG }} make lint
 
       - name: Build and push
