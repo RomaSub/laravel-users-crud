@@ -1,14 +1,27 @@
 services:
   app:
-    build: .
-    ports:
-      - "8000:8000"
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/var/www/html
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
       - APP_KEY=${APP_KEY}
+    networks:
+      - laravel_network
+
+  caddy:
+    build:
+      context: .
+      dockerfile: services/caddy/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ./services/caddy/Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - 80:80
+      - 443:443
     networks:
       - laravel_network
 
