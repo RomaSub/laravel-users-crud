@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(15);
+        $users = User::orderBy('updated_at', 'desc')->paginate(15);
 
         return inertia('Home', ['users' => $users]);
     }
