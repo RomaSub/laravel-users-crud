@@ -34,6 +34,10 @@ class UserController extends Controller
     {
         $fields = $request->validated();
 
+        if ($request->hasFile('avatar')) {
+            $fields['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
         User::create($fields);
 
         return redirect(route('users.index'));
@@ -61,6 +65,13 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $fields = $request->validated();
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $fields['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
 
         $user->update($fields);
 

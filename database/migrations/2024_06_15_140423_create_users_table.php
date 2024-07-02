@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->text('about')->nullable();
             $table->string('state')->default('active');
+            $table->string('avatar')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

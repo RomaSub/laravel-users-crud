@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'birth_date' => ['required', 'date'],
             'about' => ['nullable', 'string'],
             'state' => 'active',
+            'avatar' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }

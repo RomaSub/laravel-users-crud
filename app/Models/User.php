@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\States\Active;
-use App\States\Banned;
 use App\States\UserState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +23,7 @@ class User extends Model
         'birth_date',
         'about',
         'state',
+        'avatar',
     ];
 
     protected $casts = [

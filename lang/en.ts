@@ -13,7 +13,8 @@ const en = {
       email: 'Email',
       dateBirth: 'Date birth',
       aboutYou: 'About you',
-      about: 'About'
+      about: 'About',
+      avatar: 'Avatar'
     },
     header: {
       user: 'User',

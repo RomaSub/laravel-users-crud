@@ -1,4 +1,4 @@
-import { Row, Col, Container, Form, Button } from 'react-bootstrap';
+import { Row, Figure, Col, Container, Form, Button } from 'react-bootstrap';
 import { useForm, Head, Link } from '@inertiajs/react';
 import { User } from '@/types/User';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +24,7 @@ const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
     post(route('users.unBan', user.id));
   };
 
+  console.log(user);
   return (
     <>
       <Head title="Show" />
@@ -33,6 +34,18 @@ const Show: React.FC<ShowProps> = ({ user }: ShowProps) => {
       <Container className="mt-3">
         <Row className="justify-content-center">
           <Col className="col-lg-6">
+            {user.avatar && (
+              <Row className="mb-3">
+                <Col className="text-center">
+                  <Figure.Image
+                    src={`/storage/${user.avatar}`}
+                    width={171}
+                    height={180}
+                    alt="171x180"
+                  />
+                </Col>
+              </Row>
+            )}
             <Form onSubmit={handlerSubmmit} className="border rounded p-3">
               <Form.Group className="mb-2" controlId="formBasicFirstName">
                 <Form.Label className="text-muted small">

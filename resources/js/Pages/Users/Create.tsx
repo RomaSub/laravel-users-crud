@@ -12,12 +12,13 @@ const Create = () => {
     birth_date: '',
     gender: '',
     email: '',
-    about: ''
+    about: '',
+    avatar: null
   });
 
   const handlerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    post(route('users.store'));
+    post(route('users.store'), { forceFormData: true });
   };
 
   return (
@@ -74,6 +75,19 @@ const Create = () => {
               />
               <Form.Control.Feedback type="invalid">
                 {errors.patronymic}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicAvatar">
+              <Form.Label className="text-muted small">
+                {t('form.avatar')}
+              </Form.Label>
+              <Form.Control
+                type="file"
+                onChange={e => setData('avatar', e.target.files?.[0] || null)}
+                isInvalid={!!errors.avatar}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.avatar}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicGender">
