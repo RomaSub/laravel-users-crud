@@ -33,7 +33,8 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
-RUN composer install --prefer-dist --no-dev --optimize-autoloader
+RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader \
+    && composer dump-autoload --no-scripts --no-dev --optimize
 
 COPY . .
 
