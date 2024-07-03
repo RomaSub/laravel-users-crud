@@ -1,14 +1,30 @@
+compose-setup: compose-build compose-install
+
 setup:
 	composer install
 	cp -n .env.example .env
 	php artisan key:generate
 	touch database/database.sqlite
 	php artisan migrate
-	php artisan db:seed
 	php artisan storage:link
 	npm ci
 	npm run prepare
 	npm run build
+
+compose-build:
+	docker-compose build
+
+compose-install:
+	docker-compose run app make setup
+
+compose-lint:
+	docker-compose run app make lint
+
+compose-test:
+	docker-compose run app make test
+
+compose:
+	docker-compose up --abort-on-container-exit
 
 ansible-setup:
 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
