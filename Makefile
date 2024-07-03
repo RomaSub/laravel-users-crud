@@ -26,6 +26,8 @@ compose-test:
 compose:
 	docker-compose up --abort-on-container-exit
 
+ansible: ansible-setup ansible-release
+
 ansible-setup:
 	ansible-playbook -i ansible/inventory/inventory.yml ansible/playbooks/setup.yml
 

@@ -33,4 +33,4 @@ RUN npm run build
 EXPOSE 8000
 
 # Запускаем Laravel
-CMD ["sh", "-c", "touch /var/www/html/database/database.sqlite && php artisan migrate && npm install && npm run build && php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

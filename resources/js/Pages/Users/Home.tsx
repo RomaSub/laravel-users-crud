@@ -28,7 +28,7 @@ const Home = ({ users }: HomeProps) => {
   return (
     <>
       <Head title={component} />
-      <h1 className="mt-3 text-center">{t('header.users')}</h1>
+      <h1 className="mt-3 text-center">{t('header.users')} ТЕСТ</h1>
       <Container className="mt-4">
         <Row>
           <Col>

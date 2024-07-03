@@ -22,3 +22,38 @@
         env:
           APP_ENV: production
           DB_CONNECTION: sqlite
+
+    - name: Touch SQLite database
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: touch /var/www/html/database/database.sqlite
+
+    - name: Install PHP dependencies
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: composer install --optimize-autoloader
+
+    - name: Run migrations
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: php artisan migrate --force
+
+    - name: Install NPM packages
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: npm install
+
+    - name: Build frontend assets
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: npm run build
+
+    - name: Seed database
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: php artisan db:seed --force
+
+    - name: Start Laravel server
+      community.docker.docker_container_exec:
+        container: laravel_app
+        command: php artisan serve --host=0.0.0.0 --port=8000
